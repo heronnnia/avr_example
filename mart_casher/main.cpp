@@ -6,13 +6,15 @@
  */ 
 
 #include <avr/io.h>
-
+#include "myfunc.h"
 
 int main(void)
 {
+	init();
     /* Replace with your application code */
     while (1) 
     {
+		
     }
 }
 

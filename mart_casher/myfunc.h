@@ -16,28 +16,26 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <avr/interrupt.h>
+#include "lcd.h"
 
-void port_init()
+void init()
 {
-	DDRA = 0b11111111;   //  port A direction   ->> output(datd direction register)
-	PORTA = 0b11111111;	// port A output  -> 5v_out   0 : piano -> on(pull up) on board -> off(pull down)
-		
-	DDRD = 0xff;
-	DDRE = 0x00;
-	PORTE = 0xff;
-		
-	//timer set
-
-	DDRB = 0x00; // DIR - OUTPUT
+	DDRA = 0xff;
+	DDRD = 0x0f;
 	
-	ADMUX = 0x00;
-	ADCSRA = 0xe7;
-
-	TIMSK = 0x01;
-	TCCR0 = 0x07;	// 256 div
-	TCNT0 = 0x00;
-	_delay_ms(20);   // for system stabillity
-	//sei();
+	lcd_init();
+	lcd_clear();
+	
+	for(int i = 0; i< 2; i++)
+	{
+		lcd_putsf(0,0,(unsigned char *)" 	market   ");
+		lcd_putsf(0,1,(unsigned char *)"    system    ");
+		PORTA = 0b00000000;
+		_delay_ms(100);
+		lcd_clear();
+		PORTA = 0b11111111;
+		_delay_ms(100);		
+	}
 
 }
 
