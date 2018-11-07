@@ -34,6 +34,8 @@
 #define KEY_ROB 119
 #define KEY_DIV 183
 
+unsigned int hour = 0, min = 0, sec = 0;
+
 void init()
 {
 	DDRA = 0xff;
@@ -56,12 +58,12 @@ void init()
 }
 
 // display setting
-void displayclk(unsigned int hour,unsigned int min,unsigned int sec)
+void displayclk()
 {
 	char str[16];
 	sprintf(str,"  %2d:%2d:%2d", hour,min,sec);
 	lcd_putsf(0,0,(unsigned char *)"  welcome!!  ");
-	//lcd_putsf(0,1,(unsigned char *)str);
+	lcd_putsf(0,1,(unsigned char *)str);
 }
 
 unsigned char getkey()
